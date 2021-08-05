@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <title></title>
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/awardrotate.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+<div class="w1400-img"><img src="images/ld1.jpg" alt=""/></div>
+
+<div class="lucyDraw">
+    <div class="turnplate">
+        <canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
+        <img class="pointer" src="images/turnplate-pointer.png"/>
+    </div>
+</div>
+
+<div class="deepTime">
+    <span th:text="${trueName}"></span>,您还有<span>1次</span>抽奖机会
+</div>
+
+<div class="w1400-img zjdt"><img src="images/ld3.jpg" alt=""/>
+    <div class="w754"><a class="my">我的中奖</a></div>
+</div>
+
+<div class="w754_2">
+    <table class="th" width="100%" cellpadding='0' cellspacing='0'>
+        <tr>
+            <th width="30%">奖项</th>
+            <th width="30%">用户</th>
+            <th width="40%">时间</th>
+        </tr>
+    </table>
+    <div class="marqueeBox">
+        <table width="100%" cellpadding='0' cellspacing='0' id="marquee">
+            <tr>
+                <td width="30%" colspan="3">暂无中奖数据</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div class="w1400-img setting">
+    <img src="images/ld4.jpg" alt="">
+    <div class="w754"><img src="images/ld5.jpg" alt=""></div>
+</div>
+<div class="w1400-img rule">
+    <img src="images/ld6.jpg" alt="">
+</div>
+<div class="w754_2">
+    <div class="txt">
+        1、 凡订单金额每满2000元，即可获赠一次抽奖机会，100%中奖。
+        <br>2、 只有真实有效订单号才可获奖，退订单、虚假订单将取消其获奖资格。
+        <br> 3、 实物奖品将在活动结束一个月后统一配送，请抽奖者认真填写配送信息。
+        <br>4、 活动截止时间：2019年3月15日 24:00
+        <br>5、 活动最终解释权归咕泡教育所有。
+    </div>
+</div>
+
+
+<div class="shadowBox">
+    <div class="bigBox">
+        <div class="prize itemBox">
+            <div class="close"></div>
+            <div class="pic"><img src="images/pz1.png" alt=""></div>
+            <div class="title">小米电视</div>
+            <div class="btn">确认中奖信息</div>
+        </div>
+    </div>
+
+
+    <div class="bigBox">
+        <div class="writeInfo itemBox">
+            <div class="close"></div>
+            <form action="">
+                <h3>恭喜您抽到<span>小米电视</span></h3>
+                <ul>
+                    <li>
+                        <label>姓名：</label>
+                        <input type="text" name="">
+                    </li>
+                    <li>
+                        <label>电话：</label>
+                        <input type="text" name="">
+                    </li>
+                    <li>
+                        <label>地址：</label>
+                        <input type="text" name="">
+                    </li>
+                    <li>
+                        <label>备注：</label>
+                        <input type="text" name="">
+                    </li>
+                    <li>
+                        <div class="sub">提交信息</div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div class="bigBox">
+        <div class="subSuccess itemBox">
+            <div class="close"></div>
+            <div class="my">我的中奖</div>
+        </div>
+    </div>
+    <div class="bigBox">
+        <div class="noList itemBox">
+            <div class="close"></div>
+            <div class="close2">立刻抽奖</div>
+        </div>
+    </div>
+
+    <div class="bigBox">
+        <div class="hadList itemBox">
+            <div class="close"></div>
+            <table class="thead">
+                <tr>
+                    <th>奖项</th>
+                    <th>抽奖时间</th>
+                </tr>
+            </table>
+            <div class="listBox">
+                <table>
+                    <tr>
+                        <td class="red">小米电视</td>
+                        <td>2019-2-12 10:01:28</td>
+                    </tr>
+                    <tr>
+                        <td class="red">小米电视</td>
+                        <td>2019-2-12 10:01:28</td>
+                    </tr>
+                    <tr>
+                        <td class="red">小米电视</td>
+                        <td>2019-2-12 10:01:28</td>
+                    </tr>
+                    <tr>
+                        <td class="red">小米电视</td>
+                        <td>2019-2-12 10:01:28</td>
+                    </tr>
+                    <tr>
+                        <td class="red">小米电视</td>
+                        <td>2019-2-12 10:01:28</td>
+                    </tr>
+                    <tr>
+                        <td class="red">小米电视</td>
+                        <td>2019-2-12 10:01:28</td>
+                    </tr>
+                    <tr>
+                        <td class="red">小米电视</td>
+                        <td>2019-2-12 10:01:28</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="back">返回首页</div>
+        </div>
+    </div>
+    <div class="bigBox">
+        <div class="noDeefTime itemBox">
+            <div class="close"></div>
+            <div class="close2">返回首页</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+
+<script src="js/load-record-data.js" type="text/javascript"></script>
+<script src="js/turn-plate.js" type="text/javascript"></script>
+</html>
