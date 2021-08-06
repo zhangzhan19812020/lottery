@@ -2,6 +2,7 @@ package com.supinfood.controller;
 
 import com.supinfood.constant.RedisKeyManager;
 import com.supinfood.constant.ReturnCodeEnum;
+import com.supinfood.exception.BizException;
 import com.supinfood.exception.RewardException;
 import com.supinfood.model.LotteryItemVo;
 import com.supinfood.model.RewardContext;
@@ -49,13 +50,17 @@ public class LotteryController {
         String accountIp = currentUser.getUsername();
         String accountName = currentUser.getTrueName();
 
-        log.info("抽奖开始咯!!! 用户名={}, 姓名={}, lotteryId={}:",accountIp, accountName, id);
+        log.info("抽奖开始咯!!! 用户名={}, 姓名={}, 剩余次数={}, lotteryId={}:",accountIp, accountName, currentUser.getDrawTimes(), id);
 
         ResultResp<LotteryItemVo> resultResp=new ResultResp<>();
         try {
+
+            if(currentUser.getDrawTimes() <= 0) {
+                throw new BizException(ReturnCodeEnum.PLAY_TIMES_ZERO.getCode(), ReturnCodeEnum.PLAY_TIMES_ZERO.getMsg());
+            }
             checkDrawParams(id, accountIp);
 
-            LotteryItemVo lotteryItemVo = new LotteryItemVo(id, accountIp, accountName, "", 0, 0);
+            LotteryItemVo lotteryItemVo = new LotteryItemVo(id, accountIp, accountName, "", 0, 0, 0);
             RewardContext context = lotteryService.doDraw(lotteryItemVo);
 
             resultResp.setCode(ReturnCodeEnum.SUCCESS.getCode());
@@ -63,6 +68,8 @@ public class LotteryController {
             lotteryItemVo.setPrizeName(context.getPrizeName());
             lotteryItemVo.setPrizeId(context.getPrizeId());
             lotteryItemVo.setLevel(context.getLotteryItem().getLevel());
+            currentUser.setDrawTimes(currentUser.getDrawTimes() -1);
+            lotteryItemVo.setDrawTimes(currentUser.getDrawTimes());
             log.info("lotteryItemVo:{}", lotteryItemVo);
             resultResp.setResult(lotteryItemVo);
 
@@ -78,7 +85,6 @@ public class LotteryController {
 
     }
 
-
     /**
      * 检验抽奖的合法性
      * @param id  活动id
@@ -93,7 +99,16 @@ public class LotteryController {
 
         //如果为false，说明上一次抽奖还未结束
         if(Objects.isNull(result) || !result){
-            throw new RewardException(ReturnCodeEnum.LOTTER_DRAWING.getCode(),ReturnCodeEnum.LOTTER_DRAWING.getMsg());
+            throw new RewardException(ReturnCodeEnum.LOTTERY_DRAWING.getCode(),ReturnCodeEnum.LOTTERY_DRAWING.getMsg());
         }
     }
+
+
+
+
+
+
+
+
+
 }

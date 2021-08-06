@@ -56,7 +56,7 @@ public abstract class AbstractRewardProcessor implements RewardProcessor<RewardC
         Long result = redisTemplate.opsForHash().increment(context.getKey(),"validStock",-1);
         //当前奖品库存不足，提示未中奖，或者返回一个兜底的奖品
         if(result.intValue()<0){
-            throw new UnRewardException(ReturnCodeEnum.LOTTER_REPO_NOT_ENOUGHT.getCode(),ReturnCodeEnum.LOTTER_REPO_NOT_ENOUGHT.getMsg());
+            throw new UnRewardException(ReturnCodeEnum.LOTTERY_REPO_NOT_ENOUGHT.getCode(),ReturnCodeEnum.LOTTERY_REPO_NOT_ENOUGHT.getMsg());
         }
         List<Object> properties= Arrays.asList("id","prizeName");
         List<Object> prizes=redisTemplate.opsForHash().multiGet(context.getKey(),properties);

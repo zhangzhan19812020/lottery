@@ -42,6 +42,11 @@ public class SysUser extends Model implements UserDetails {
      */
     private String trueName;
 
+    /**
+     * 抽奖次数
+     */
+    private int drawTimes;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

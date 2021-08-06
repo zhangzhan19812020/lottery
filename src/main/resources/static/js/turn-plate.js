@@ -89,8 +89,10 @@ $(document).ready(function () {
             success: function(data){
                 if(data.code == "0000"){
                     console.log(data);
+                    document.getElementById("spDrawTimes").innerText=data.result["drawTimes"];
                     //奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
                     rotateFn(data.result.level-2, data.result.prizeName);
+
                 } else{
                     alert(data.msg);
                     turnplate.bRotate = !turnplate.bRotate;

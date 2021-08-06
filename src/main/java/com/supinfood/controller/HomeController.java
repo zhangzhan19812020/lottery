@@ -13,6 +13,7 @@ public class HomeController {
     @GetMapping("/")
     public String index(Authentication authentication, Model model) {
         model.addAttribute("trueName",((SysUser)authentication.getPrincipal()).getTrueName());
+        model.addAttribute("drawTimes",((SysUser)authentication.getPrincipal()).getDrawTimes() + "次");
         return "index";
     }
 

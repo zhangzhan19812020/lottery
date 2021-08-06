@@ -42,4 +42,9 @@ public class LotteryItemVo {
      * 奖品id
      */
     private Integer prizeId;
+
+    /**
+     * 剩余次数
+     */
+    private int DrawTimes;
 }

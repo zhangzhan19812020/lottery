@@ -109,17 +109,21 @@ public class LotteryServiceImpl extends ServiceImpl<LotteryMapper, Lottery> impl
             log.info("从redis中获取了lottery:{}", lottery);
         } else {
             lottery = lotteryMapper.selectById(lotteryItemVo.getLotteryId());
+            if(!Objects.isNull(lottery)) {
+                redisTemplate.opsForValue().set(RedisKeyManager.getLotteryRedisKey(lottery.getId()), JSON.toJSONString(lottery));
+            }
+
             log.info("从数据库中获取了lottery:{}", lottery);
         }
         if (Objects.isNull(lottery)) {
-            throw new BizException(ReturnCodeEnum.LOTTER_NOT_EXIST.getCode(), ReturnCodeEnum.LOTTER_NOT_EXIST.getMsg());
+            throw new BizException(ReturnCodeEnum.LOTTERY_NOT_EXIST.getCode(), ReturnCodeEnum.LOTTERY_NOT_EXIST.getMsg());
         }
         LocalDateTime now = LocalDateTime.now();
         if (now.isBefore(lottery.getStartTime())) {
-            throw new BizException(ReturnCodeEnum.LOTTER_NOT_START.getCode(), ReturnCodeEnum.LOTTER_NOT_START.getMsg());
+            throw new BizException(ReturnCodeEnum.LOTTERY_NOT_START.getCode(), ReturnCodeEnum.LOTTERY_NOT_START.getMsg());
         }
         if (now.isAfter(lottery.getEndTime())) {
-            throw new BizException(ReturnCodeEnum.LOTTER_FINISH.getCode(), ReturnCodeEnum.LOTTER_FINISH.getMsg());
+            throw new BizException(ReturnCodeEnum.LOTTERY_FINISH.getCode(), ReturnCodeEnum.LOTTERY_FINISH.getMsg());
         }
         return lottery;
     }
@@ -145,7 +149,7 @@ public class LotteryServiceImpl extends ServiceImpl<LotteryMapper, Lottery> impl
 
         //奖项数据未配置
         if (lotteryItems.isEmpty()) {
-            throw new BizException(ReturnCodeEnum.LOTTER_ITEM_NOT_INITIAL.getCode(), ReturnCodeEnum.LOTTER_ITEM_NOT_INITIAL.getMsg());
+            throw new BizException(ReturnCodeEnum.LOTTERY_ITEM_NOT_INITIAL.getCode(), ReturnCodeEnum.LOTTERY_ITEM_NOT_INITIAL.getMsg());
         }
 
         int lastScope = 0;
